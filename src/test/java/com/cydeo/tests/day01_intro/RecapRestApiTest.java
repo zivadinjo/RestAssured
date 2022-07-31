@@ -4,6 +4,9 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import sun.rmi.transport.Endpoint;
+
+import javax.annotation.meta.When;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,7 +64,7 @@ public class RecapRestApiTest {
     @Test
     public void getSingleUserApiTest() {
 
-    Response response= when().get(url+"/5");
+        Response response = when().get(url + "/5");
 
         //Then response status should be 200
         System.out.println("Status code =" + response.statusCode());
@@ -79,6 +82,25 @@ public class RecapRestApiTest {
         System.out.println("Content type header value = " + response.contentType());
         assertTrue(response.contentType().contains("application/json"), "Verification failed");
 
+
+    }
+
+    /**
+     * When Send get request to API Endpoint:
+     * "https://reqres.in/api/users/50"
+     * Then Response status code should be 404
+     * And Response body should contain "{}"
+     */
+    @DisplayName("GET request to non existing user")
+    @Test
+    public void getSingleUserNegativeApiTest() {
+        Response response = when().get(url + "/50");
+
+        System.out.println("Status code = " + response.statusCode());
+        assertEquals(404, response.statusCode());
+
+        System.out.println("Json body = " + response.asString());
+        assertEquals("{}", response.asString());
 
     }
 
