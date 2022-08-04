@@ -1,12 +1,8 @@
 package com.cydeo.tests.day01_intro;
 
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import sun.rmi.transport.Endpoint;
-
-import javax.annotation.meta.When;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
