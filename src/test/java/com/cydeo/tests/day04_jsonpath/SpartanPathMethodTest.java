@@ -13,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,6 +33,7 @@ public class SpartanPathMethodTest extends SpartanTestBase {
      * And phone is "7842554879"
      */
 
+    @DisplayName("GET /spartans/{id} and path()")
     @Test
     public void readSpartanJsonUsingPathTest(){
 
@@ -50,6 +53,44 @@ public class SpartanPathMethodTest extends SpartanTestBase {
         assertEquals("Jaimie",response.path("name"));
         assertEquals("Female",response.path("gender"));
         assertEquals(7842554879L,(long)response.path("phone"));
+
+    }
+
+    /**
+     Given accept is json
+     When I send get request to /api/spartans
+     Then status code is 200
+     And content type is json
+     And I can navigate json array object
+     */
+
+    @DisplayName("GET /spartans and path()")
+    @Test
+    public void readSpartanJsonArrayUsingPathTest(){
+
+        Response response = given().accept(ContentType.JSON)
+                .when().get("/spartans");
+
+        assertEquals(200, response.statusCode());
+        assertEquals("application/json", response.contentType());
+
+        //print first spartan id and name
+        System.out.println("first spartan id = " + response.path("id[0]"));
+        System.out.println("first person name = " + response.path("name[0]"));
+        //System.out.println("first person name = " + response.path("[0].name"));--> same result as above one
+
+        //print last spartan id and name [-1] index point to last one
+        System.out.println("Last spartan id = " + response.path("id[-1]"));
+        System.out.println("Last person name = " + response.path("name[-1]"));
+
+        //get all ids into a List
+        List<Integer> allIds= response.path("id");
+        System.out.println(allIds.size());
+        System.out.println(allIds);
+
+        //get all names and say hi
+        List<String> names = response.path("name");
+        names.forEach(name -> System.out.println("Hi "+ name));
 
     }
 
