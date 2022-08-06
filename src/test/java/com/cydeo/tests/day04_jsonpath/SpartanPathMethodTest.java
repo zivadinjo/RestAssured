@@ -90,7 +90,12 @@ public class SpartanPathMethodTest extends SpartanTestBase {
 
         //get all names and say hi
         List<String> names = response.path("name");
-        names.forEach(name -> System.out.println("Hi "+ name));
+        names.forEach(name -> System.out.println("Hi "+ name));//functional programing
+
+        for(String name : names){
+
+            System.out.println("By " + name);
+        }
 
     }
 
