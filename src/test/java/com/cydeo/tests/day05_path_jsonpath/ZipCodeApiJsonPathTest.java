@@ -22,7 +22,7 @@ public class ZipCodeApiJsonPathTest {
      and postal code path param value is 22102
      When I send get request to http://api.zippopotam.us/{country}/{postal-code}
      Then status code is 200
-     Then "post code" is "22102"
+     Then "postal-code" is "22102"
      And  "country" is "United States"
      And "place name" is "Mc Lean"
      And  "state" is "Virginia"
@@ -48,6 +48,8 @@ public class ZipCodeApiJsonPathTest {
         //assign response json payload/body to Jsonpath
         JsonPath jsonPath = response.jsonPath();
 
+        verifyZipCode(jsonPath,"22102");// using verifyZipCode method that we created
+
         //navigate the json and print/assert country value
         System.out.println("country name = " + jsonPath.getString("country"));
         assertEquals("United States" , jsonPath.getString("country"));
@@ -56,6 +58,21 @@ public class ZipCodeApiJsonPathTest {
         System.out.println("post code = " + jsonPath.getString("'post code'"));
         String zipCode = jsonPath.getString("'post code'");
         assertEquals("22102", zipCode);
+
+        //verify place name
+        System.out.println("place name = " + jsonPath.getString("places[0].'place name'"));
+        assertEquals("Mc Lean",jsonPath.getString("places[0].'place name'"));
+
+        //verify state is Virginia
+        String state = jsonPath.getString("places[0].state");
+        System.out.println("state = " + state);
+        assertEquals("Virginia",state);
+
+    }
+
+    public void verifyZipCode(JsonPath jsonPath,String expZipCode){
+
+        assertEquals(expZipCode,jsonPath.getString("'post code'"));
 
     }
 
