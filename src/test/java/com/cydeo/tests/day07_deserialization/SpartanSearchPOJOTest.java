@@ -5,12 +5,10 @@ import com.cydeo.pojo.SpartanSearch;
 import com.cydeo.utils.SpartanTestBase;
 import io.restassured.http.ContentType;
 
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
-import java.net.HttpCookie;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -63,6 +61,21 @@ public class SpartanSearchPOJOTest extends SpartanTestBase {
         //get specific value
         System.out.println("second spartan name = " + secondSpartan.getName());
         System.out.println("second spartan id = " + secondSpartan.getId());
+
+        List<Spartan> spartanData = spartanSearch.getContent();
+        //String seconndSpartan = String.valueOf(spartanData.get(1));
+        //System.out.println(seconndSpartan);
+
+        //read all names to list
+        List<String> names = new ArrayList<>();
+        for (Spartan sp : spartanData){
+            names.add(sp.getName());
+        }
+        System.out.println("names = " +names);
+
+        //using functional programing
+        List<String> allNames = spartanData.stream().map(sp->sp.getName()).collect(Collectors.toList());
+        System.out.println("allNames = " + allNames);
 
 
     }
