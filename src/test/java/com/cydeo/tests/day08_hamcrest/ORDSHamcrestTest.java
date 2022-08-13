@@ -31,17 +31,38 @@ public class ORDSHamcrestTest extends HRApiTestBase {
     @Test
     public void countriesTest() {
 
-        given().accept(ContentType.JSON)
+        String countryId = given().accept(ContentType.JSON)
                 .when().get("/countries")
                 .then().assertThat().statusCode(200)
                 .and().contentType(ContentType.JSON)
                 .and().body("count", is(25),
-                "items.country_id", hasItems("AR", "AU", "BE", "BR", "CA"),
-                "items.country_name", hasItems("Argentina", "Australia", "Belgium", "Brazil", "Canada"),
-                        "items[0].country_id",is(equalTo("AR")),
-                        "items[1].country_id",is(equalTo("AU")))
-                .log().all();
+                        "items.country_id", hasItems("AR", "AU", "BE", "BR", "CA"),
+                        "items.country_name", hasItems("Argentina", "Australia", "Belgium", "Brazil", "Canada"),
+                        "items[0].country_id", is(equalTo("AR")),
+                        "items[1].country_id", is(equalTo("AU")))
+                .and().extract().body().path("items[0].country_id");
+        //.log().all();
 
+        System.out.println("countryId = " + countryId);
+
+
+        /**
+         * * given accept type is json
+         *      * when I send get request to /countries
+         *      * Then status code is 200
+         *      * and content type is json
+         *      And county_id is AR ,country_name is Argentina, and region_id is 2
+         */
+
+        given().accept(ContentType.JSON)
+                .and().pathParam("country_id",countryId)
+                .when().get("/countries/{country_id}")
+                .then().assertThat().statusCode(200)
+                .and().contentType(ContentType.JSON)
+                .and().body("country_name",equalTo("Argentina"),
+                "country_id",equalTo("AR"),
+                        "region_id",equalTo(2));
+        //.and().extract().jsonPath(); -> needs to be assigned in variable at the beginning of the path
 
     }
 }
