@@ -57,4 +57,26 @@ public class SingleSpartanJsonSchemaValidationTest extends SpartanTestBase {
 
     }
 
+    /**
+     * given accept type is json
+     * and query param : nameContains "e" and gender "Female"
+     * when I send GEt request to /spartans/{id}
+     * then status code is 200
+     * And json payload/body matches SearchSpartanSchema.json
+     */
+
+    @Test
+    public void searchSpartansJasonSchemaValidationTest(){
+
+        given().accept(ContentType.JSON)
+                .when().queryParam("nameContains","e")
+                .and().queryParam("gender","Female")
+                .when().get("/spartans/search")
+                .then().statusCode(200)
+                .and().body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/jsonschemas/SearchSpartansSchema.json")))
+                .log().all();
+
+
+    }
+
 }
