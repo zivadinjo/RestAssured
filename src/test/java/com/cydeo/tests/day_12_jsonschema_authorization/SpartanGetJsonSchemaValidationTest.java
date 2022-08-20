@@ -1,15 +1,14 @@
 package com.cydeo.tests.day_12_jsonschema_authorization;
 
 import com.cydeo.utils.SpartanTestBase;
+import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.restassured.http.ContentType;
 
 import java.io.File;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static io.restassured.RestAssured.given;
 
 public class SpartanGetJsonSchemaValidationTest extends SpartanTestBase {
 
