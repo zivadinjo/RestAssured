@@ -36,4 +36,25 @@ public class SingleSpartanJsonSchemaValidationTest extends SpartanTestBase {
                 .and().log().all();
 
     }
+
+    /**
+     * given accept type is json
+     * and path param id is 15
+     * when I send GEt request to /spartans/{id}
+     * then status code is 200
+     * And json payload/body matches AllSpartanSchema.json
+     */
+
+    @DisplayName("GET /spartan{id} and json schema validation")
+    @Test
+    public void allSpartansJsonSchemaValidationTest(){
+
+        given().accept(ContentType.JSON)
+                .when().get("/spartans")
+                .then().statusCode(200)
+                .and().body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/jsonschemas/AllSpartansSchema.json")))
+                .log().all();
+
+    }
+
 }
