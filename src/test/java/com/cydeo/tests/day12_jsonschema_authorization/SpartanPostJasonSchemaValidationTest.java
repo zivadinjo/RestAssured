@@ -1,4 +1,4 @@
-package com.cydeo.tests.day_12_jsonschema_authorization;
+package com.cydeo.tests.day12_jsonschema_authorization;
 
 import com.cydeo.utils.SpartanRestUtils;
 import com.cydeo.utils.SpartanTestBase;

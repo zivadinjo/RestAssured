@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.*;
 public abstract class BookItAPITestBase {
 
     @BeforeAll
-    public void setUp() {
+    public static void setUp() {
         baseURI = ConfigurationReader.getProperty("bookit.base.url");
     }
 
@@ -23,6 +23,6 @@ public abstract class BookItAPITestBase {
                 .and().extract().path("accessToken");
         assertThat("accessToken is empty or null",accessToken,not(emptyOrNullString()));
 
-        return "Bearer: " + accessToken;
+        return "Bearer " + accessToken;
     }
 }
