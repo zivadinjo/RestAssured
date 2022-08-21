@@ -1,13 +1,13 @@
 package com.cydeo.tests.day13_acces_token_specs;
 
+import com.cydeo.utils.BookItAPITestBase;
 import com.cydeo.utils.ConfigurationReader;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import com.cydeo.utils.BookItAPITestBase;
 import static io.restassured.RestAssured.*;
+import io.restassured.response.Response;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 public class BoolItApiTest extends BookItAPITestBase {
 
@@ -32,6 +32,11 @@ public class BoolItApiTest extends BookItAPITestBase {
                 .when().get("/api/campuses");
 
         response.prettyPrint();
+
+        assertThat(response.statusCode(),is(200));
+        assertThat(response.contentType(),is("application/json"));
+        assertThat(response.path("location"), hasItems("VA", "IL"));
+
 
     }
 
