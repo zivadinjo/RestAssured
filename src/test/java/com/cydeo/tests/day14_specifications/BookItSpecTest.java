@@ -41,12 +41,12 @@ public class BookItSpecTest extends BookItAPITestBase {
 
         //by hamcrest Matchers
         given().spec(teacherReqSpec)
-                .when().get("api/teachers/me")
+                .when().get("/api/teachers/me")
                 .then().spec(responseSpec)
-                .and().body("id", is(1816),
-                      "firstname", is("Barbabas"),
-                              "lastName", is("Lyst"),
-                              "teacher", is("role"));
+                .and().body("id",       is(1816),
+                        "firstName",is("Barbabas"),
+                        "lastName" , is("Lyst"),
+                        "role",      is("teacher"));
 
     }
 }
