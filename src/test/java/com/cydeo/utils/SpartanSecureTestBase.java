@@ -12,9 +12,9 @@ public abstract class SpartanSecureTestBase {
     protected static RequestSpecification requestSpec;
 
     @BeforeAll
-    public static void setUp(){
+    public static void setUp() {
 
-        RestAssured.baseURI= ConfigurationReader.getProperty("spartan.secure.api.url");
+        RestAssured.baseURI = ConfigurationReader.getProperty("spartan.secure.api.url");
 
         requestSpec = given().accept(ContentType.JSON)
                 .and().auth().basic("admin", "admin");

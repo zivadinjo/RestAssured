@@ -27,7 +27,7 @@ public class SpartanSpecTest extends SpartanSecureTestBase {
 
 //        given().accept(ContentType.JSON)
 //                .and().auth().basic("admin", "admin")
-        given().spec(requestSpec)
+          given().spec(requestSpec)
                 .when().get("/spartans")
                 .then().log().all();
 
@@ -38,7 +38,7 @@ public class SpartanSpecTest extends SpartanSecureTestBase {
 
 //        given().accept(ContentType.JSON)
 //                .and().auth().basic("admin", "admin")
-        given().spec(requestSpec)
+          given().spec(requestSpec)
                 .and().pathParam("id", 15)
                 .when().get("/spartans/{id}")
                 .then().log().all();
