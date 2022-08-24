@@ -4,13 +4,9 @@ import com.cydeo.utils.BookItAPITestBase;
 import com.cydeo.utils.ConfigurationReader;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
-
 import static io.restassured.RestAssured.*;
-
 import io.restassured.response.Response;
-
 import java.util.Map;
-
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
