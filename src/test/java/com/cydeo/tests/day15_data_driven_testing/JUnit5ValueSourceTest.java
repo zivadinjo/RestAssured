@@ -27,7 +27,7 @@ public class JUnit5ValueSourceTest {
 
         @BeforeAll
         public static void setUp() {
-            baseURI = ConfigurationReader.getProperty("zipcode.api.url");
+            baseURI = ConfigurationReader.getProperty("zip.code.api.url");
         }
 
         @ParameterizedTest
