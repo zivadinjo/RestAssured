@@ -38,7 +38,7 @@ public class BookItAccessTokenTest {
 }
 
 //urls and credentials goto configuration.properties
-//Test base for BookItAPITestBase
+//Test base for BookItApiMethodSourceExcelTest
 //  -> assign baseUrl
 //  -> generateToken method
 //  -> call that method in test base
