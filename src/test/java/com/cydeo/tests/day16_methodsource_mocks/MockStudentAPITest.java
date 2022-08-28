@@ -24,6 +24,7 @@ public class MockStudentAPITest {
         given().accept(ContentType.JSON)
                 .when().get("/students/1")
                 .then().assertThat().statusCode(200)
+                .and().contentType(ContentType.JSON)
                 .log().all();
     }
 
